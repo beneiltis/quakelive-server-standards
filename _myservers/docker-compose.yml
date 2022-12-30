@@ -8,7 +8,8 @@ services:
       - redis:/data # uses a Docker volumne by default
   
   ca1:
-    image: quakeliveserverstandards/ca
+#    image: quakeliveserverstandards/ca
+    image: biltisberger/quake-live-ca
     restart: always
     ports:
       - '27960:27960/udp' # game port
@@ -28,9 +29,10 @@ services:
       - SV_PRIVATECLIENTS=mo1337
       # - SV_PRIVATEPASSWORD=
       - QLX_PLUGINS=
-      - qlx_owner=76561197971324444
+      - QLX_OWNER=76561197971324444
       - SV_TAGS=mogenius, fun
     volumes:
+      #- './arena:/home/steam/ql/baseq3'
       - './access.txt:/home/steam/ql/baseq3/access.txt'
       - './autoexec.cfg:/home/steam/ql/baseq3/autoexec.cfg'
       - '../configs/standard/server.cfg:/home/steam/ql/baseq3/server.cfg'

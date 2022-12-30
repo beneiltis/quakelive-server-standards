@@ -7,6 +7,7 @@ RUN apt-get -y install redis-server
 
 USER steam
 # Copy the configuration file
+COPY _myservers/arena/* /home/steam/ql/baseq3/
 COPY _myservers/access.txt /home/steam/ql/baseq3/access.txt
 COPY _myservers/autoexec.cfg /home/steam/ql/baseq3/autoexec.cfg
 COPY configs/standard/server.cfg /home/steam/ql/baseq3/server.cfg
