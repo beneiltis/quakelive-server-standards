@@ -6,6 +6,40 @@ services:
     restart: always
     volumes:
       - redis:/data # uses a Docker volumne by default
+  
+  ca1:
+    image: quakeliveserverstandards/ca
+    restart: always
+    ports:
+      - '27960:27960/udp' # game port
+      - '27960:27960/tcp' # stats port
+      - '28960:28960' # rcon port
+    environment:
+      - NET_PORT=27960
+      # - ZMQ_RCON_PORT=
+      # - ZMQ_STATS_PORT=
+      - 'SV_HOSTNAME=mogenius CA Cologne/Germany'
+      - SV_TAGS=ca std
+      - SERVERSTARTUP=map thunderstruck stdca
+      # - COM_HUNKMEGS=
+      # - G_PASSWORD=mo1337
+      # - SV_HOSTNAME=
+      - SV_MAXCLIENTS=24
+      - SV_PRIVATECLIENTS=mo1337
+      # - SV_PRIVATEPASSWORD=
+      - QLX_PLUGINS=
+      - qlx_owner=76561197971324444
+      - SV_TAGS=mogenius, fun
+    volumes:
+      - './access.txt:/home/steam/ql/baseq3/access.txt'
+      - './autoexec.cfg:/home/steam/ql/baseq3/autoexec.cfg'
+      - '../configs/standard/server.cfg:/home/steam/ql/baseq3/server.cfg'
+      - '../factories/standard/ca/ca.factories:/home/steam/ql/baseq3/scripts/ca.factories'
+      - '../mappools/standard/ca/mappool.txt:/home/steam/ql/baseq3/mappool.txt'
+      - '../minqlx-plugins/standard/ca:/home/steam/ql/minqlx-plugins'
+      - '../workshop/standard/ca/workshop.txt:/home/steam/ql/baseq3/workshop.txt'
+    depends_on: 
+      - redis
 
 # Docker volumne containing the data of the Redis database
 # You can safely delete the redis service without losing data
